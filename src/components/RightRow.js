@@ -10,7 +10,7 @@ export default function RightRow({listOfMoviesRight}) {
     <Button onHidden={onHidden} setOnHidden={setOnHidden} />
       {!onHidden && <>
         <TopRightMove/>
-        <ListOfItem listOfMoviesRight={listOfMoviesRight} />
+        {<ListOfItem listOfMoviesRight={listOfMoviesRight} />}
     </>
     }
     </div>

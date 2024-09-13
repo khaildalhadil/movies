@@ -1,11 +1,8 @@
-
-
-
-export default function Headers() {
+export default function Header({children}) {
   return(
     <nav>
       <ul>
-        <Search/>
+        {children}
         <Input/>    
         <Rate/>
       </ul>
@@ -13,13 +10,6 @@ export default function Headers() {
   )
 }
 
-function Search() {
-  return (
-    <li>
-      <p>نتائج البحث 3</p>
-    </li>
-  )
-}
 
 function Input() {
   return (

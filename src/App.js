@@ -1,6 +1,7 @@
-import Header from './components/Header';
-import LeftRow from './components/LeftRow';
-import RightRow from './components/RightRow';
+import Header from './components/Header.js';
+import LeftRow from './components/LeftRow.js';
+import RightRow from './components/RightRow.js';
+import ListOfItem from './components/RightRow.js'
 
 export default function App() {
   
@@ -47,7 +48,11 @@ export default function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header>
+        <li>
+          <p>نتائج البحث {listOfMovies.length}</p>
+        </li>
+      </Header>
       <div className='content_in_center' >
         <LeftRow listOfMovies={listOfMovies} />
         <RightRow listOfMoviesRight={listOfMoviesRight} />
