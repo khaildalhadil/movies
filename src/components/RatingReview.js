@@ -1,5 +1,12 @@
 import { useState } from "react"
 
+import {PropTypes} from 'prop-types';
+
+// Count.propTypes = {
+//   maxRating: PropTypes.string,
+// }
+
+
 const boxStyle = {
   display: 'flex',
   alignItems: 'center',
@@ -11,8 +18,7 @@ const gapForStars = {
   alignItems: 'center',
 }
 
-
-export default function RatingReview({maxRating = 5, size = 18, color="orange", setGetStars}) {
+export default function RatingReview({maxRating = 5, size = 18, color="orange"}) {
 
   const fontSizeStyle= {
     fontSize: size,
@@ -23,7 +29,6 @@ export default function RatingReview({maxRating = 5, size = 18, color="orange", 
   const [tempRating, setTempRating] = useState(0);
 
   function handlRating(i) {
-    setGetStars(i+1)
     setRating(i+1)
   }
 

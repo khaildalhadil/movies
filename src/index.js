@@ -5,17 +5,17 @@ import ReactDOM from 'react-dom/client';
 import RatingReview from './components/RatingReview';
 import './style/ratingReview.css'
 
-function Test() {
+// function Test() {
 
-  const [getStars, setGetStars] = useState(0)
+//   const [getStars, setGetStars] = useState(0)
 
-  return (
-    <div>
-      <RatingReview color={'blue'} maxRating={5} setGetStars={setGetStars} getStars={getStars} />
-      <p>It is start {getStars} </p>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <RatingReview color={'blue'} maxRating={5} setGetStars={setGetStars} getStars={getStars} />
+//       <p>It is start {getStars} </p>
+//     </div>
+//   )
+// }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -32,7 +32,7 @@ root.render(
     <StarRating size={24} color="red" className="test" defaultRating={2} />
 
     <Test /> */}
-  <Test  />
+  {/* <Test  /> */}
   </React.StrictMode>
 );
 
