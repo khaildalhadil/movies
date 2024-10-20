@@ -1,7 +1,7 @@
 import Button from './Button';
 const {useState} = require('react');
 
-export default function LeftRow({listOfMovies}) {
+export default function LeftRow({listOfMovies, setTargetImgId, sendIdToParant}) {
 
   const [onHidden, setOnHidden] = useState(false);
 
@@ -9,34 +9,38 @@ export default function LeftRow({listOfMovies}) {
     <section className="left center_content_div" >
       <Button onHidden={onHidden} setOnHidden={setOnHidden} />
       {!onHidden && 
-        <ListOfItem listOfMovies={listOfMovies} />
+        <ListOfItem sendIdToParant={sendIdToParant} setTargetImgId={setTargetImgId} listOfMovies={listOfMovies}/>
       }
     </section>
   )
 }
 
-function ListOfItem({listOfMovies}) {
+function ListOfItem({listOfMovies, setTargetImgId, sendIdToParant}) {
+  
   return(
   <ul className="List_of_items" >
     {listOfMovies.map((itmeInfo, i) => {
       return(
-        <ListItme 
-          itmeInfo={itmeInfo} 
-          key={i} 
-        />
+        <ListItme sendIdToParant={sendIdToParant} setTargetImgId={setTargetImgId} itmeInfo={itmeInfo} key={i} />
       );
     })}
   </ul>
   )
 }
 
-function ListItme({itmeInfo}) {
+function ListItme({itmeInfo, setTargetImgId, sendIdToParant}) {
+
+  function handleTargetClick(imdbID) {
+    sendIdToParant(imdbID)
+  }
+
   return(
-    <li className="list_item">
-      <img src={itmeInfo.img} alt='img_of_movie' />
+    <li className="list_item item_left"
+      onClick={()=> handleTargetClick(itmeInfo.imdbID) }>
+      <img src={itmeInfo.Poster} alt='img_of_movie' />
       <div className="name_releaseYear" >
-        <p>{itmeInfo.movieName}</p>
-        <p>📝{itmeInfo.releaseYear}</p>
+        <p>{itmeInfo.Title}</p>
+        <p>📝{itmeInfo.Year}</p>
       </div>
     </li>
   )

@@ -1,20 +1,23 @@
-export default function Header({children}) {
+export default function Header({children, setQuery, query}) {
   return(
     <nav>
       <ul>
         {children}
-        <Input/>    
+        <Input setQuery={setQuery} query={query}/>    
         <Rate/>
       </ul>
     </nav>
   )
 }
 
-
-function Input() {
+function Input({setQuery, query}) {
   return (
     <li>
-      <input type="text" placeholder="ابحث عن الافلام" />
+      <input 
+        value={query}
+        onChange={(e)=> setQuery(e.target.value)}
+        type="text" 
+        placeholder="serch for movie" />
     </li>
   )
 }

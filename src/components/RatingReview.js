@@ -1,28 +1,30 @@
 import { useState } from "react"
 
-import {PropTypes} from 'prop-types';
-
 // Count.propTypes = {
 //   maxRating: PropTypes.string,
 // }
 
 
-const boxStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-}
 
 const gapForStars = {
   display: 'flex',
   alignItems: 'center',
 }
 
-export default function RatingReview({maxRating = 5, size = 18, color="orange"}) {
-
+export default function RatingReview({setRatringClick, onUserClickStars, maxRating = 5, size = 25, color="orange", bg="#444"}) {
+  
+  const boxStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    
+    borderRadius: '10px',
+    padding: '0 0 0 65px'
+  }
+  
   const fontSizeStyle= {
     fontSize: size,
-    color: color
+    color: color,
   }
 
   const [rating, setRating] = useState(0);
@@ -30,6 +32,8 @@ export default function RatingReview({maxRating = 5, size = 18, color="orange"})
 
   function handlRating(i) {
     setRating(i+1)
+    onUserClickStars(i+1)
+    setRatringClick(true)
   }
 
   return(
