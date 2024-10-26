@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Router, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import LeftRow from './components/LeftRow.js';
 import RightRow from './components/RightRow.js';
 import ListOfItem from './components/RightRow.js';
+
+// bug 1-title not change 
+// bug 2-request run not stop
+// bug 3-when i serach for movies it dose't close the move <ShowTORate/>
+
+// challenge https://frankfurter.dev/ convet USA doller to rill or revers or any money
 
 export default function App() {
   
@@ -11,9 +16,8 @@ export default function App() {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [query, setQuery] = useState('')
-  const [watched, setWatched] = useState([]);
   const [isRetedBefor, setIsRetedBefor] = useState(false);
-
+  
   // state to hold fetched data
   // const [watched, setListOfMoviesRight] = useState([]);
   const [listOfMovies, setListOfMovies] = useState([]);
@@ -22,24 +26,24 @@ export default function App() {
   const [infoClicedId, setInfoClicedId] = useState('');
   const [isShow, setIsShow] = useState(false);
   const [title, setTitle] = useState('تقييم الافلام');
-
+  // const [closeKey, setCloseKey] = useState(false);
+  // const [watched, setWatched] = useState([]);
+  const items = JSON.parse(localStorage.getItem('moveis'));
+  const [watched, setWatched] = useState(items || []);
 
   function deleteTheItem(id) {
     setWatched(watched.filter((el) => el.id !== id));
+    
   }
 
-  function handleChangeTitle() {
+useEffect(
+  function () {
     document.title = title;
 
     // cleanup function not working right now 🔥❌
     return function() {
       document.title = 'تقييم الافلام';
-      console.log('HIIIIIIIIII')
-    }
-  }
-
-  useEffect(()=> {
-    handleChangeTitle();
+    };
   }, [title])
 
   function sendIdToParant(id) {
@@ -125,7 +129,23 @@ useEffect(() => {
       movieName: objectOfDataMoves.Title
     }])
     setIsShow(false);
+    
   }
+
+  useEffect(()=> {
+    localStorage.setItem('moveis', JSON.stringify(watched));
+    
+    // if (!items.length === 0) {
+    //   setWatched(items);
+    // }
+    // setWatched(JSON.parse(localStorage.getItem('moveis')));
+  }, [watched])
+
+  // useEffect(() => {
+  //   if (items)
+  //   else
+  //     console.log(items);
+  // }, [])
 
   return (
     <div className="App">
@@ -144,6 +164,7 @@ useEffect(() => {
           handleChangeOnHidden={handleChangeOnHidden} 
           infoClicedId={infoClicedId} 
           isShow={isShow} 
+          setIsShow={setIsShow}
           targetImgId={targetImgId} 
           watched={watched} 
           dataToAddToWatchList={handleDataWatch}

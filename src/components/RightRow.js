@@ -10,6 +10,7 @@ export default function RightRow(
   dataToAddToWatchList,
   handleChangeOnHidden,
   isShow,
+  setIsShow,
   infoClicedId,
   setTitle
   }){
@@ -34,7 +35,7 @@ export default function RightRow(
   const [onHidden, setOnHidden] = useState(false);
   const [stars, setStars] = useState(0);
   const [ratringClick, setRatringClick] = useState(false);
-
+  
   function addListToWatch() {
     dataToAddToWatchList(stars, infoFromFetch)
   }
@@ -53,6 +54,8 @@ export default function RightRow(
               {isLoading ? <Loading/>: 
                 <div className='content__more__info' >
                   <ShowTORate
+                    setIsShow={setIsShow}
+                    isShow={isShow}
                     infoFromFetch={infoFromFetch} 
                     handleChangeOnHidden={handleChangeOnHidden}/>
                   <div className='content__more__info__botton' >
@@ -112,6 +115,7 @@ function ButtonRat(
 
     addListToWatch();
     onUserClick(false);
+
   }
 
   return(
@@ -183,7 +187,26 @@ function TopRightMove({watched}) {
   )
 }
 
-function ShowTORate({infoFromFetch, handleChangeOnHidden}) {
+function ShowTORate({setIsShow, isShow, infoFromFetch, handleChangeOnHidden}) {
+
+  // i have problom there ❌❌❌
+useEffect(
+  function() {
+    function handleOnKeyDown(e){
+      if(e.key === 'Escape') {
+        setIsShow(false);
+        console.log("Close")
+      }
+    }
+
+    document.addEventListener('keydown',handleOnKeyDown)
+
+    // clean up fucntion work ✔✔✔✔✔✔✔
+    return function() {
+      document.removeEventListener('keydown', handleOnKeyDown);
+    };
+  }, [isShow])
+
   return(
     <div className='header_of_right_Row' >
       <p 
